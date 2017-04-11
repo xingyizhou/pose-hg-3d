@@ -4,7 +4,7 @@ This repository includes code for the network presented in:
 
 > Xingyi Zhou, Qixing Huang, Xiao Sun, Xiangyang Xue, Yichen Wei, 
 > **Weakly-supervised Transfer for 3D Human Pose Estimation in the Wild**
-> ([arXiv:xxxx.xxxxx](https://arxiv.org/abs/xxxx.xxxxx))
+> ([arXiv:1704.02447](https://arxiv.org/abs/1704.02447))
 
 The code is developed upon [Stacked Hourglass Network](https://github.com/anewell/pose-hg-train).
 
