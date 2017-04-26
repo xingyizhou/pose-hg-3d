@@ -1,0 +1,7 @@
+*.t7
+*~
+*.pyc
+exp/
+data/**/images
+src/debug
+src/tmp/*

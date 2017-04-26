@@ -37,7 +37,6 @@ def show_3d(ax, points, c = (255, 0, 0)):
     
     
 def show_2d(img, points, c = 'g'):
-  print 'imgshape', img.shape
   points = points.reshape(J, 2)
   for j in range(J):
     cv2.circle(img, (int(points[j, 0]), int(points[j, 1])), 3, c, -1)
@@ -55,7 +54,7 @@ def Show3d(data):
   ax.set_xlabel('z') 
   ax.set_ylabel('x') 
   ax.set_zlabel('y')
-  oo = max(joint.max(), oo) / 8
+  oo = max(joint.max(), 2) / 8
   xmax, ymax, zmax, xmin, ymin, zmin = oo, oo, oo, -oo, -oo, -oo
   if 'gt' in data:
     show_3d(ax, data['gt'], 'r')

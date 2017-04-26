@@ -1,6 +1,6 @@
 require 'os'
 require 'hdf5'
-local projectDir = '/home/zxy/Projects/pose-hg-3d'
+local projectDir = '../'
 local pyFile = projectDir .. '/src/util/pyTools.py'
 
 
