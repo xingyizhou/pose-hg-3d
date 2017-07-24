@@ -28,7 +28,7 @@ local c = torch.Tensor({w / 2, h / 2})
 local size = math.max(h, w)
 local inp = crop(img, c, 1 * size / 200.0, 0, inputRes)
 
-local model = torch.load('hgreg-3d.t7')
+local model = torch.load('../models/hgreg-3d.t7')
 
 local output = model:forward(inp:view(1, 3, inputRes, inputRes):cuda())
 local tmpOutput = output[#output - 1]
