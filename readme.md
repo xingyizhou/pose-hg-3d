@@ -1,9 +1,9 @@
-# Towards 3D Human Pose Estimation in the Wild: A Weakly-supervised Approach
+# Towards 3D Human Pose Estimation in the Wild: a Weakly-supervised Approach
 
 This repository includes code for the network presented in:
 
 > Xingyi Zhou, Qixing Huang, Xiao Sun, Xiangyang Xue, Yichen Wei, 
-> **Towards 3D Human Pose Estimation in the Wild: A Weakly-supervised Approach**
+> **Towards 3D Human Pose Estimation in the Wild: a Weakly-supervised Approach**
 > ICCV 2017 ([arXiv:1704.02447](https://arxiv.org/abs/1704.02447))
 
 The code is developed upon [Stacked Hourglass Network](https://github.com/anewell/pose-hg-train).
@@ -29,13 +29,16 @@ We provide example images in `src/images/`. For testing your own image, it is im
 
 - Stage1: Train the 2D hourglass component (drop LR at 40 epochs)
 
-  `cd src
-  th main.lua -expID Stage1 -dataset fusion -task pose-hgreg-3d -netType hgreg-3d -varWeight 0.0 -regWeight 0.0  -nEpochs 60`
+  `cd src`
+  
+  `th main.lua -expID Stage1 -dataset fusion -task pose-hgreg-3d -netType hgreg-3d -varWeight 0.0 -regWeight 0.0  -nEpochs 60`
 
 Our results of this stage is provided [here](https://drive.google.com/open?id=0BxjtxDYaOrYPVmJxNndiaHN1OGc). Most of the experiments in the paper are based on this model. 
 
 - Stage2: Train without Geometry loss
+
   `th main.lua -expID Stage2 -dataset fusion -task pose-hgreg-3d -loadModel ../models/HGRegS2M2M2_60.t7 -varWeight 0.0 -regWeight 0.1 -dropLR 40 -nEpochs 50`
 
 -Stage3: Train with Geometry loss
+
   `th main.lua -expID Stage3 -dataset fusion -task pose-hgreg-3d -loadModel ../exp/fusion/Stage2/model_50.t7 -varWeight 0.01 -regWeight 0.1 -LR 2.5e-5 -nEpochs 10`
