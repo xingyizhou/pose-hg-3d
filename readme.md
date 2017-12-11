@@ -8,6 +8,8 @@ This repository includes code for the network presented in:
 
 The code is developed upon [Stacked Hourglass Network](https://github.com/anewell/pose-hg-train).
 
+**\[New\]** Checkout our [PyTorch implementation](https://github.com/xingyizhou/Pytorch-pose-hg-3d).
+
 Contact: [zhouxy13@fudan.edu.cn](mailto:zhouxy13@fudan.edu.cn)
 
 ## Requirements
@@ -27,19 +29,28 @@ We provide example images in `src/images/`. For testing your own image, it is im
   - Run `python GetH36M.py` in `src/Tools/` to convert H36M annotations to hdf5 format.
   - Run `python GetMPI-INF-3D.py` in `src/Tools/` to convert 3DHP annotations to hdf5 format. (or set `valid3DHP` in `opt.lua` false if you don't evaluate on this dataset)
 
-- Stage1: Train the 2D hourglass component (drop LR at 40 epochs)
-
-  `cd src`
-
-  `th main.lua -expID Stage1 -dataset fusion -task pose-hgreg-3d -netType hgreg-3d -varWeight 0.0 -regWeight 0.0  -nEpochs 60`
-
+- Stage1: Train the 2D hourglass component
+```
+cd src
+th main.lua -expID Stage1 -dataset fusion -task pose-hgreg-3d -netType hgreg-3d -varWeight 0.0 -regWeight 0.0  -nEpochs 60
+```
 Our results of this stage is provided [here](https://drive.google.com/open?id=0BxjtxDYaOrYPVmJxNndiaHN1OGc). Most of the experiments in the paper are based on this model. 
 
-- Stage2: Train without Geometry loss
-
-  `th main.lua -expID Stage2 -dataset fusion -task pose-hgreg-3d -loadModel ../models/HGRegS2M2M2_60.t7 -varWeight 0.0 -regWeight 0.1 -dropLR 40 -nEpochs 50`
-
+- Stage2: Train without Geometry loss  (drop LR at 40 epochs)
+```
+th main.lua -expID Stage2 -dataset fusion -task pose-hgreg-3d -loadModel ../models/HGRegS2M2M2_60.t7 -varWeight 0.0 -regWeight 0.1 -dropLR 40 -nEpochs 50
+```
 - Stage3: Train with Geometry loss
+```
+th main.lua -expID Stage3 -dataset fusion -task pose-hgreg-3d -loadModel ../exp/fusion/Stage2/model_50.t7 -varWeight 0.01 -regWeight 0.1 -LR 2.5e-5 -nEpochs 10`
+```
 
-  `th main.lua -expID Stage3 -dataset fusion -task pose-hgreg-3d -loadModel ../exp/fusion/Stage2/model_50.t7 -varWeight 0.01 -regWeight 0.1 -LR 2.5e-5 -nEpochs 10`
-  
+## Citation
+
+    @InProceedings{Zhou_2017_ICCV,
+    author = {Zhou, Xingyi and Huang, Qixing and Sun, Xiao and Xue, Xiangyang and Wei, Yichen},
+    title = {Towards 3D Human Pose Estimation in the Wild: A Weakly-Supervised Approach},
+    booktitle = {The IEEE International Conference on Computer Vision (ICCV)},
+    month = {Oct},
+    year = {2017}
+    }
